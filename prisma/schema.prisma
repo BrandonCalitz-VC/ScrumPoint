@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model Matches {
+  MatchID     Int           @id(map: "PK__Matches__4218C8378FF1D05C")
+  HomeTeamID  Int
+  AwayTeamID  Int
+  HomeScore   Int
+  AwayScore   Int
+  MatchDate   DateTime      @db.Date
+  Status      String?       @db.VarChar(20)
+  Predictions Predictions[]
+  TeamMatches TeamMatches[]
+}
+
+model Predictions {
+  PredictionID             Int     @id(map: "PK__Predicti__BAE4C1409BF66E8E") @default(autoincrement())
+  MatchID                  Int
+  UserID                   Int
+  PredictedWinningTeamID   Int
+  HomeTeamScorePrediction  Int
+  AwayTeamScorePrediction  Int
+  PredictedScoreDifference Int
+  ActualScoreDifference    Int
+  Matches                  Matches @relation(fields: [MatchID], references: [MatchID], onUpdate: NoAction, map: "FK__Predictio__Match__6477ECF3")
+  Users                    Users   @relation(fields: [UserID], references: [UserID], onUpdate: NoAction, map: "FK__Predictio__UserI__656C112C")
+}
+
+model sysdiagrams {
+  name         String @db.NVarChar(128)
+  principal_id Int
+  diagram_id   Int    @id(map: "PK__sysdiagr__C2B05B6157E713C9") @default(autoincrement())
+  version      Int?
+  definition   Bytes?
+
+  @@unique([principal_id, name], map: "UK_principal_name")
+}
+
+model TeamMatches {
+  TeamMatchID Int     @id(map: "PK__TeamMatc__A59F137318F16685") @default(autoincrement())
+  TeamID      Int
+  MatchID     Int
+  Matches     Matches @relation(fields: [MatchID], references: [MatchID], onUpdate: NoAction, map: "FK__TeamMatch__Match__6754599E")
+  Teams       Teams   @relation(fields: [TeamID], references: [TeamID], onUpdate: NoAction, map: "FK__TeamMatch__TeamI__66603565")
+}
+
+model Teams {
+  TeamID      Int           @id(map: "PK__Teams__123AE7B9B25D0FE6")
+  TeamName    String        @db.VarChar(50)
+  Flag        String        @db.VarChar(100)
+  CountryCode String?       @db.VarChar(5)
+  Standings   Standings[]
+  TeamMatches TeamMatches[]
+}
+
+model Users {
+  UserID      Int           @id(map: "PK__Users__1788CCACCB2EAEFF") @default(autoincrement())
+  Username    String        @db.VarChar(20)
+  Firstname   String        @db.VarChar(50)
+  Surname     String        @db.VarChar(50)
+  Email       String        @db.VarChar(100)
+  ContactNum  String        @db.VarChar(10)
+  Country     String        @db.VarChar(75)
+  Password    String        @db.VarChar(20)
+  Score       Float
+  Predictions Predictions[]
+}
+
+model Pools {
+  PoolID    String      @id(map: "PK__Pools__EEFA8ACF638D7EFA") @db.VarChar(1)
+  Standings Standings[]
+}
+
+model Standings {
+  PoolID   String @db.VarChar(1)
+  TeamID   Int
+  Played   Int
+  Wins     Int
+  Losses   Int
+  Points   Int
+  Position Int
+  Pools    Pools  @relation(fields: [PoolID], references: [PoolID], onUpdate: NoAction, map: "FK__Standings__PoolI__05D8E0BE")
+  Teams    Teams  @relation(fields: [TeamID], references: [TeamID], onUpdate: NoAction, map: "FK__Standings__TeamI__06CD04F7")
+
+  @@id([PoolID, TeamID], map: "PK__Standing__6FD924B43C6087D9")
+}

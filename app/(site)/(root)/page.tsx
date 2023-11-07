@@ -1,11 +1,10 @@
-import Image from 'next/image'
+"use client"
+import { signOut } from "next-auth/react";
 
 export default function Home() {
   return (
-    <main className="h-screen w-full bg-white">
-      <div className="w-full h-full">
-        
-      </div>
-    </main> 
+    <main className="flex h-screen">
+      <button onClick={()=>signOut()} className="w-16 h-5 bg-black"/>
+    </main>
   )
 }
