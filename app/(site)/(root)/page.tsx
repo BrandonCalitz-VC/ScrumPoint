@@ -23,7 +23,7 @@ const App = () => {
       {/* Top Bar */}
       <div className="top-bar" style={{ backgroundColor: 'white', padding: '20px', display: 'flex', alignItems: 'center', borderRadius: '10px' }}>
         <div className="left-image">
-          <Image src={imgLogo} alt="logo" />
+          <Image src={imgLogo} alt="logo" height={80}/>
         </div>
         <div className="tabs" style={{ display: 'flex', gap: '20px', flex: 1 }}>
           {/* Insert your tab components here */}
@@ -33,7 +33,7 @@ const App = () => {
           <span style={linkStyle}>Predictions</span>
         </div>
         <div className="right-image">
-          <Image src={imgProfile} alt="profilePic" />
+          <Image src={imgProfile} alt="profilePic" height={50}/>
         </div>
       </div>
 
