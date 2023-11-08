@@ -108,7 +108,7 @@ export default function Auth() {
 
             {varient=== 'LOGIN'? 
               <div className='text-white text-sm'>
-                <label>Don't have an account: </label>
+                <label> Don&#39;t have an account:</label>
                 <span className='cursor-pointer font-bold' onClick={() => togglevarient()}>Sign Up</span>
               </div>:
               <div className='text-white text-sm'>
