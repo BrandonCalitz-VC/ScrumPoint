@@ -67,7 +67,7 @@ model Users {
   Email       String        @db.VarChar(100)
   ContactNum  String        @db.VarChar(10)
   Country     String        @db.VarChar(75)
-  Password    String        @db.VarChar(20)
+  Password    String?       @db.VarChar(255)
   Score       Float
   Predictions Predictions[]
 }

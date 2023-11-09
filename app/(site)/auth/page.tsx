@@ -1,5 +1,5 @@
 "use client"
-import bg from '@/public/bg.png'
+
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
@@ -72,13 +72,7 @@ export default function Auth() {
 
 
   return (
-   <main className="h-screen w-full flex justify-center items-center" 
-   style={{
-    backgroundImage: `url(${bg.src})`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
-    }}>
+   <main className="h-screen w-full flex justify-center items-center">
     <div className="bg-black bg-opacity-70  h-[450px] w-[700px] flex flex-col items-center gap-5 border-4 rounded-3xl relative overflow-hidden">
     <Image src={logo} alt='' className='absolute top-0 right-0 rounded-bl-3xl' height={100}/>
       <div className='text-white text-4xl font-bold mt-10'>{varient=== 'LOGIN'? "Log In": 'Sign Up'}</div>

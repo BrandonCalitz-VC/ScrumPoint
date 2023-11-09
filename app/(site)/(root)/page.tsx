@@ -2,15 +2,8 @@ import Image from 'next/image';
 import imgLogo from '@/public/logo.png';
 import imgProfile from '@/public/profileImg.png';
 import imgRugbyPlayer from '@/public/RugbyPlayer2.png';
-import backgroundImage from '@/public/bg.png';
 
 const App = () => {
-  const backgroundStyle = {
-    backgroundImage: `url(${backgroundImage.src})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'repeat-y',
-  };
 
   const linkStyle = {
     flex: 1,
@@ -19,7 +12,7 @@ const App = () => {
   };
 
   return (
-    <div className="app-container" style={{ ...backgroundStyle, paddingLeft: '10%', paddingRight: '10%', paddingTop: '10vh' }}>
+    <div className="app-container">
       {/* Top Bar */}
       <div className="top-bar" style={{ backgroundColor: 'white', padding: '20px', display: 'flex', alignItems: 'center', borderRadius: '10px' }}>
         <div className="left-image">

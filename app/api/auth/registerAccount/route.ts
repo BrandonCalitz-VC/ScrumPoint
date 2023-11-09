@@ -9,8 +9,6 @@ export async function POST(
 ){
 	console.log("REGISTER USER API");
  try{
-			
-		
     const body = await req.json();
     const {email, password, username} = body;
 

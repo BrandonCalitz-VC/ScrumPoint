@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import AuthContext from '../providers/AuthContext'
+import bg from '@/public/bg.png';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,11 +16,20 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
+
   return (
-    <html lang="en">
+    <html lang="en" style={{
+      backgroundImage: `url(${bg.src})`,
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center'
+      }}>
         <body className={inter.className}>
           <AuthContext>
-            {children}
+            <div>
+              {children}
+            </div>
           </AuthContext>
         </body>
     </html>
