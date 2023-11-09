@@ -13,6 +13,7 @@ import { Sacramento } from "next/font/google";
 
 const App = () => {
   const [activeButton, setActiveButton] = useState("");
+  const topBarHeight = "100px";
 
   const backgroundStyle = {
     backgroundImage: `url(${backgroundImage.src})`,
@@ -36,7 +37,7 @@ const App = () => {
       ...linkStyle,
       color: activeButton === name ? "white" : "black",
       backgroundColor: activeButton === name ? "#2A87F5" : "white",
-      height: "100%",
+      height: topBarHeight,
       fontWeight: "bold", // Make the text bold
     };
   };
@@ -59,37 +60,47 @@ const App = () => {
           display: "flex",
           alignItems: "center",
           borderRadius: "15px",
+          height: topBarHeight,
         }}
       >
         <div className="left-image">
           <Image className="ml-10 mr-10" src={imgLogo} alt="logo" height={80} />
         </div>
         <div
-          className="tabs w-full h-full"
-          style={{ display: "flex", gap: "20px", flex: 1 }}
+          className="tabs w-full"
+          style={{
+            display: "flex",
+            gap: "20px",
+            flex: 1,
+            height: topBarHeight,
+          }}
         >
           {/* Insert your tab components here */}
           <div
-            className="w-full h-full hover:bg-blue-400 p-20 text-center font-bold"
+            className="h-full hover:bg-blue-400 p-10 text-center font-bold"
             onClick={() => handleButtonClick("Matches")}
+            style={{ flexBasis: "25%" }}
           >
             Matches
           </div>
           <div
-            className="w-full h-full hover:bg-blue-400 p-20 text-center font-bold"
+            className=" hover:bg-blue-400 p-10 text-center font-bold"
             onClick={() => handleButtonClick("Pools")}
+            style={{ flexBasis: "25%" }}
           >
             Pools
           </div>
           <div
-            className="w-full h-full hover:bg-blue-400 p-20 text-center font-bold"
+            className=" hover:bg-blue-400 p-10 text-center font-bold"
             onClick={() => handleButtonClick("Knockout")}
+            style={{ flexBasis: "25%" }}
           >
             Knockout
           </div>
           <div
-            className="w-full h-full hover:bg-blue-400 p-20 text-center font-bold"
+            className=" hover:bg-blue-400 p-10 text-center font-bold"
             onClick={() => handleButtonClick("Predictions")}
+            style={{ flexBasis: "25%" }}
           >
             Predictions
           </div>
@@ -139,12 +150,13 @@ const App = () => {
           <div className="Upcoming Matches" style={{ textAlign: "center" }}>
             <h2 className="text-4xl"> Upcoming Matches</h2>
             <HomeMatch
+              matchDate="16 October 2023"
               homeTeam="RSA"
               homeScore={0}
               homeFlag={SAFlag.src}
               awayFlag={EngFlag.src}
               awayScore={0}
-              awayTeam=""
+              awayTeam="ENG"
             />
           </div>
           <div className="Previous Matches" style={{ textAlign: "center" }}>
