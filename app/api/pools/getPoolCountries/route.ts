@@ -29,7 +29,6 @@ export async function POST(
     },
     
   })
-  console.log(data, pool);
   
   
   if(data.length === 0) throw new Error("Invalid Pool")

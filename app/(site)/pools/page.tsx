@@ -81,7 +81,7 @@ export default function Home() {
       getCoreRowModel: getCoreRowModel(),
     });
   return (
-    <main className="h-screen w-full p-10">
+    <main className="h-full w-full py-10">
       <div className=" h-full w-full  rounded-3xl border-4 flex flex-col p-3 px-10 bg-black bg-opacity-70">
         <div className="flex justify-between rounded-2xl bg-white text-3xl mx-20 text-center overflow-hidden">
          <div 

@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import AuthContext from '../providers/AuthContext'
 import bg from '@/public/bg.png';
+import NavBar from '../components/NavBar';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,18 +20,20 @@ export default function RootLayout({
 
 
   return (
-    <html lang="en" style={{
+    <html lang="en" 
+    style={{
       backgroundImage: `url(${bg.src})`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center'
       }}>
         <body className={inter.className}>
-          <AuthContext>
-            <div>
-              {children}
-            </div>
-          </AuthContext>
+            <AuthContext>
+                <NavBar>
+                  {children}
+                </NavBar>
+            </AuthContext>
+          
         </body>
     </html>
   )

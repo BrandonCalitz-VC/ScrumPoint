@@ -16,7 +16,8 @@ model Matches {
   MatchDate   DateTime      @db.Date
   Status      String?       @db.VarChar(20)
   Predictions Predictions[]
-  TeamMatches TeamMatches[]
+  HomeTeam    Teams @relation(name:"HomeTeam" ,fields: [HomeTeamID], references: [TeamID], onUpdate: NoAction, map: "FK__Matches_Teams__6477ECF3")
+  AwayTeam    Teams @relation(name:"AwayTeam" ,fields: [AwayTeamID], references: [TeamID], onUpdate: NoAction, map: "FK__Matches_Teams__5477ECF3")
 }
 
 model Predictions {
@@ -42,21 +43,14 @@ model sysdiagrams {
   @@unique([principal_id, name], map: "UK_principal_name")
 }
 
-model TeamMatches {
-  TeamMatchID Int     @id(map: "PK__TeamMatc__A59F137318F16685") @default(autoincrement())
-  TeamID      Int
-  MatchID     Int
-  Matches     Matches @relation(fields: [MatchID], references: [MatchID], onUpdate: NoAction, map: "FK__TeamMatch__Match__6754599E")
-  Teams       Teams   @relation(fields: [TeamID], references: [TeamID], onUpdate: NoAction, map: "FK__TeamMatch__TeamI__66603565")
-}
-
 model Teams {
-  TeamID      Int           @id(map: "PK__Teams__123AE7B9B25D0FE6")
-  TeamName    String        @db.VarChar(50)
-  Flag        String        @db.VarChar(100)
-  CountryCode String?       @db.VarChar(5)
+  TeamID      Int         @id(map: "PK__Teams__123AE7B9B25D0FE6")
+  TeamName    String      @db.VarChar(50)
+  Flag        String      @db.VarChar(100)
+  CountryCode String?     @db.VarChar(5)
   Standings   Standings[]
-  TeamMatches TeamMatches[]
+  HomeTeam    Matches[]   @relation("HomeTeam")
+  AwayTeam    Matches[]   @relation("AwayTeam")
 }
 
 model Users {
