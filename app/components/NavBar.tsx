@@ -45,7 +45,7 @@ const NavBar: FC<navbarProps> = ({ children }) => {
             </div>
             <div
               className={clsx("w-full hover:bg-blue-400 p-10 text-center font-bold cursor-pointer", path== '/predictions' && 'bg-neutral-300')}
-              onClick={() => router.push('/predictions')}
+              onClick={() => router.push('/prediction')}
             >
               Predictions
             </div>

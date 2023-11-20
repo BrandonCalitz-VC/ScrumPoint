@@ -18,29 +18,19 @@ model Matches {
   Predictions Predictions[]
   HomeTeam    Teams @relation(name:"HomeTeam" ,fields: [HomeTeamID], references: [TeamID], onUpdate: NoAction, map: "FK__Matches_Teams__6477ECF3")
   AwayTeam    Teams @relation(name:"AwayTeam" ,fields: [AwayTeamID], references: [TeamID], onUpdate: NoAction, map: "FK__Matches_Teams__5477ECF3")
+  
 }
 
 model Predictions {
-  PredictionID             Int     @id(map: "PK__Predicti__BAE4C1409BF66E8E") @default(autoincrement())
-  MatchID                  Int
-  UserID                   Int
-  PredictedWinningTeamID   Int
-  HomeTeamScorePrediction  Int
-  AwayTeamScorePrediction  Int
-  PredictedScoreDifference Int
-  ActualScoreDifference    Int
-  Matches                  Matches @relation(fields: [MatchID], references: [MatchID], onUpdate: NoAction, map: "FK__Predictio__Match__6477ECF3")
-  Users                    Users   @relation(fields: [UserID], references: [UserID], onUpdate: NoAction, map: "FK__Predictio__UserI__656C112C")
-}
-
-model sysdiagrams {
-  name         String @db.NVarChar(128)
-  principal_id Int
-  diagram_id   Int    @id(map: "PK__sysdiagr__C2B05B6157E713C9") @default(autoincrement())
-  version      Int?
-  definition   Bytes?
-
-  @@unique([principal_id, name], map: "UK_principal_name")
+  PredictionID            Int      @id(map: "PK__Predicti__BAE4C1409BF66E8E") @default(autoincrement())
+  MatchID                 Int
+  UserID                  Int
+  PredictedWinningTeamID  Int
+  HomeTeamScorePrediction Int
+  AwayTeamScorePrediction Int
+  IsChecked               Boolean?
+  Matches                 Matches  @relation(fields: [MatchID], references: [MatchID], onUpdate: NoAction, map: "FK__Predictio__Match__6477ECF3")
+  Users                   Users    @relation(fields: [UserID], references: [UserID], onUpdate: NoAction, map: "FK__Predictio__UserI__656C112C")
 }
 
 model Teams {
@@ -83,4 +73,14 @@ model Standings {
   Teams    Teams  @relation(fields: [TeamID], references: [TeamID], onUpdate: NoAction, map: "FK__Standings__TeamI__06CD04F7")
 
   @@id([PoolID, TeamID], map: "PK__Standing__6FD924B43C6087D9")
+}
+
+model sysdiagrams {
+  name         String @db.NVarChar(128)
+  principal_id Int
+  diagram_id   Int    @id(map: "PK__sysdiagr__C2B05B61B77B11AD") @default(autoincrement())
+  version      Int?
+  definition   Bytes?
+
+  @@unique([principal_id, name], map: "UK_principal_name")
 }

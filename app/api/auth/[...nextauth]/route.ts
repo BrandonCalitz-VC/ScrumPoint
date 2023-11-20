@@ -31,8 +31,8 @@ export const authOptions: AuthOptions = {
 					user.Password
 				)
 				if(!isCorrectPassword) throw new Error('Invalid Credentials')
-
-				return user;
+				debugger;
+				return {id: user.UserID};
 			}
 		}),
 		
@@ -42,6 +42,22 @@ export const authOptions: AuthOptions = {
 		strategy: "jwt",
 	},
 	secret: process.env.NEXT_AUTH_SECRET,
+	callbacks:{
+		jwt({ token, account, user }) {
+			if (account) {
+			  token.accessToken = account.access_token
+			  token.id = user?.id
+			}
+			return token
+		  },
+		session({ session, token }) {
+			// I skipped the line below coz it gave me a TypeError
+			// session.accessToken = token.accessToken;
+			session.user.id = token.id;
+	  
+			return session;
+		  },
+	}
 }
 
 const handler = NextAuth(authOptions);
