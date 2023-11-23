@@ -49,15 +49,16 @@ export default function Auth() {
 
   const onSubmit:SubmitHandler<FieldValues> = (data) =>{
     
-    
     if(varient === 'SIGNUP'){
       axios.post('/api/auth/registerAccount',  data)
       .catch((err)=> console.log("Something went wrong", err))
     }
     if(varient === 'LOGIN'){
-      signIn('credlogin',{
-        ...data,
-        redirect: false
+      debugger;
+      signIn('credentials',{  
+        redirect: false, 
+        email: data.email,
+        password: data.password
         })
         .then((callback)=> {
           if(callback?.error){

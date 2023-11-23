@@ -14,9 +14,6 @@ interface navbarProps {
 const NavBar: FC<navbarProps> = ({ children }) => {
     const router = useRouter();
     const path = usePathname()
-    const handleButtonClick = (path: string) => {
-        router.push(path)
-      };
   return (
     <div className='h-screen w-full flex flex-col pt-10 px-10'>
       <div className="bg-white flex items-center rounded-2xl">
@@ -26,22 +23,22 @@ const NavBar: FC<navbarProps> = ({ children }) => {
           <div className="w-full flex justify-between">
             <div
               className={clsx("w-full hover:bg-blue-400 p-10 text-center font-bold cursor-pointer", path== '/' && 'bg-neutral-300')}
-              onClick={() => handleButtonClick("/")}
+              onClick={() => router.push("/")}
             >
               Matches
             </div>
             <div
               className={clsx("w-full hover:bg-blue-400 p-10 text-center font-bold cursor-pointer", path== '/pools' && 'bg-neutral-300')}
-              onClick={() => handleButtonClick("/pools")}
+              onClick={() => router.push("/pools")}
 
             >
               Pools
             </div>
             <div
               className={clsx("w-full hover:bg-blue-400 p-10 text-center font-bold cursor-pointer",path== '/knockout' && 'bg-neutral-300')}
-              onClick={() => router.push('/predictions')}
+              onClick={() => router.push('/leaderboard')}
             >
-              Knockout
+              Leaderboard
             </div>
             <div
               className={clsx("w-full hover:bg-blue-400 p-10 text-center font-bold cursor-pointer", path== '/predictions' && 'bg-neutral-300')}

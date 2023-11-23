@@ -10,10 +10,10 @@ export const authOptions: AuthOptions = {
 	adapter: PrismaAdapter(prisma),
 	providers:[
 		CredentialsProvider({
-			name: 'credlogin',
+			name: 'Credentials',
 			credentials: {
 				email : {label: 'email', type: 'text'},
-				password: {label : 'password', type:'password'}
+				password: {label : 'password', type:'password'},
 			},
 			async authorize(credentials,req){
 				if(!credentials?.email ||!credentials?.password){
@@ -31,9 +31,10 @@ export const authOptions: AuthOptions = {
 					user.Password
 				)
 				if(!isCorrectPassword) throw new Error('Invalid Credentials')
-				debugger;
 				return {id: user.UserID};
-			}
+			},
+		type:"credentials",
+		id: "credentials",
 		}),
 		
 	],
@@ -57,7 +58,7 @@ export const authOptions: AuthOptions = {
 	  
 			return session;
 		  },
-	}
+	},
 }
 
 const handler = NextAuth(authOptions);
