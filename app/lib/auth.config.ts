@@ -1,13 +1,13 @@
 // auth.config.ts
 import bcrypt from 'bcrypt';
-import { NextAuthOptions } from 'next-auth';
+import { AuthOptions, NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
 import prisma from '@/app/lib/prismadb';
 import { Users } from '@prisma/client';
 
-const authOptions: NextAuthOptions = {
+const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
@@ -55,6 +55,12 @@ const authOptions: NextAuthOptions = {
 
       return session;
     },
+  },
+  generateStaticParams: async () => {
+    // Add any static parameters needed for authentication routes
+    return {
+      // Add your static parameters here
+    };
   },
 };
 

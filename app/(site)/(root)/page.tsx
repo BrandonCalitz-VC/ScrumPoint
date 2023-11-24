@@ -12,7 +12,7 @@ import axios from "axios";
 
 const App = () => {
   const [matches, setMatches] = useState<MatchListResult[]>()
-  const date :Date = new Date("2023-09-20")
+  const date :Date = new Date("2023-11-24")
   useEffect(()=>{
     (async () => {
       try {
@@ -34,25 +34,25 @@ const App = () => {
             style={{ width: "100%" }}
           />
         </div>
-        <div className="w-full" >
+        <div className="w-full mt-8" >
           {/* Place to insert upcoming and upcoming matches */}
-          <h2 className="text-4xl"> Previous Matches</h2>
-          <div className="text-center flex flex-col max-h-96 overflow-hidden overflow-y-auto " >
-          
-            {matches?.map((x,r)=> <HomeMatch
-              key={r}
-              matchDate={x.MatchDate}
-              homeTeam={x.HomeTeam.TeamName}
-              homeScore={x.HomeScore}
-              homeFlag={x.HomeTeam.Flag}
-              awayFlag={x.AwayTeam.Flag}
-              awayScore={x.AwayScore}
-              awayTeam={x.AwayTeam.TeamName}
-            />)}
-            
+          <h2 className="text-4xl mb-4 font-bold"> Previous Matches</h2>
+          <div className="text-center flex flex-col max-h-96 overflow-hidden overflow-y-auto border-t-2 border-b-2">
+            {matches?.map((x, r) => (
+              <HomeMatch
+                key={r}
+                matchDate={x.MatchDate}
+                homeTeam={x.HomeTeam.TeamName}
+                homeScore={x.HomeScore}
+                homeFlag={x.HomeTeam.Flag}
+                awayFlag={x.AwayTeam.Flag}
+                awayScore={x.AwayScore}
+                awayTeam={x.AwayTeam.TeamName}
+              />
+            ))}
           </div>
-          <div className="text-center">
-            
+          <div className="text-center mt-4">
+            {/* Additional content can be added here */}
           </div>
         </div>
       </div>

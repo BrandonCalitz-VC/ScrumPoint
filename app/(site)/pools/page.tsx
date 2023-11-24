@@ -11,21 +11,24 @@ import { useEffect, useMemo, useState } from "react";
 type Varient = 'A' | 'B' | 'C' | 'D' 
 
 export default function Home() {
-  const [varient, setVarient] = useState('A')
-  const [data, setData] = useState([]);
-  
-  useEffect(()=>{
+  const [varient, setVarient] = useState<Varient>('A');
+  const [data, setData] = useState<PoolCountries[]>([]);
+
+  useEffect(() => {
     (async () => {
       try {
         const pool = varient;
-        const {data:teams} = await axios.post('/api/pools/getPoolCountries',{pool})
-        
-        setData(teams)
+        const { data: teams } = await axios.post('/api/pools/getPoolCountries', { pool });
+
+        // Sort teams by points in descending order
+        const sortedTeams = teams.sort((a: PoolCountries, b: PoolCountries) => b.points - a.points);
+
+        setData(sortedTeams);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     })();
-  },[varient])
+  }, [varient]);
 
   const columnHelper = createColumnHelper<PoolCountries>();
   const columns = [
@@ -114,7 +117,7 @@ export default function Home() {
           "w-full hover:bg-neutral-400 py-4 cursor-pointer",
           varient === 'D' && "bg-neutral-300"
           )}>
-          Pool F
+          Pool D
          </div>
         </div>
         <Table table={table}/>
