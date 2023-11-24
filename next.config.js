@@ -10,7 +10,6 @@ typescript: {
   // !! WARN !!
   ignoreBuildErrors: true,
   },
-output: 'export'
 }
 
 module.exports = nextConfig
